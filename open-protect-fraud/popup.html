@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Análisis de VirusTotal</title>
+</head>
+<body>
+  <div id="results"></div>
+
+  <script src="popup.js">
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      if (request.action === 'showResults') {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.textContent = `Resultado de VirusTotal: ${request.data.totalDetections} detecciones.`;
+
+        // Puedes agregar más detalles aquí, por ejemplo:
+        if (request.data.totalDetections > 0) {
+          resultsDiv.textContent += " Se recomienda precaución.";
+        } else {
+          resultsDiv.textContent += " No se encontraron amenazas.";
+        }
+      } else if (request.action === 'showError') {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.textContent = `Error: ${request.error}`;
+      }
+    });
+  </script>
+</body>
+</html>

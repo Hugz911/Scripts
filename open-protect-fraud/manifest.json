@@ -1,0 +1,21 @@
+
+{
+  "manifest_version": 3,
+  "name": "Analizador de VirusTotal",
+  "version": "1.0",
+  "description": "Analiza la URL actual con VirusTotal.",
+  "permissions": ["activeTab", "scripting", "storage", "history"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": ["<all_urls>"]
+}
